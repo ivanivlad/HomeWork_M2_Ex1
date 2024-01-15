@@ -20,7 +20,11 @@ public class Main {
     }
 
     private static void ex1() {
-        Zoo zoo = new Zoo(new Bird(), new Tiger(), new Dog());
+        Zoo zoo = new Zoo();
+        zoo.putAnimal(new Bird());
+        zoo.putAnimal(new Tiger());
+        zoo.putAnimal(new Dog());
+
         Bird bird = zoo.getAnimal(Bird.class);
         bird.fly();
 
@@ -30,8 +34,6 @@ public class Main {
         Dog dog = zoo.getAnimal(Dog.class);
         dog.bark();
 
-        Bird bird1 = zoo.getBird();
-        bird1.fly();
     }
 
     private static void ex2() {

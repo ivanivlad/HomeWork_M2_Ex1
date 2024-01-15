@@ -1,36 +1,22 @@
 package zoo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Zoo {
-    private final Cage<Bird> birdCage;
-    private final Cage<Tiger> tigerCage;
-    private final Cage<Dog> dogCage;
+    private final List<Animal> animals = new ArrayList<Animal>();
 
-    public Zoo(Bird bird, Tiger tiger, Dog dog) {
-        this.birdCage = new Cage<>(bird);
-        this.tigerCage = new Cage<>(tiger);
-        this.dogCage = new Cage<>(dog);
-    }
-
-    public Bird getBird() {
-        return birdCage.getAnimal();
-    }
-
-    public Dog getDog() {
-        return dogCage.getAnimal();
-    }
-
-    public Tiger getTiger() {
-        return tigerCage.getAnimal();
+    public <T extends Animal> void putAnimal(T animal) {
+        animals.add(animal);
     }
 
     public <T extends Animal> T getAnimal(Class<T> clazz) {
-        if (Bird.class == clazz) {
-            return (T) birdCage.getAnimal();
-        } else if (Dog.class == clazz) {
-            return (T) dogCage.getAnimal();
-        } else if (Tiger.class == clazz) {
-            return (T) tigerCage.getAnimal();
+        for (var animal: animals) {
+            if ( clazz.isInstance(animal)) {
+                return (T) animal;
+            }
         }
-        throw new RuntimeException("Нет такого типа в этом слове");
+        throw new RuntimeException("Нет такого животного");
     }
+
 }
